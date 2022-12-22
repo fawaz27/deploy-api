@@ -2,12 +2,12 @@
   "name": "novels",
   "version": "1.0.0",
   "description": "",
-  "main": "build/server.js",
+  "main": "src/server.ts",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
     "test": "jest",
-    "start:prod": "node build/server.js"
+    "start": "node build/server.js"
   },
   "repository": {
     "type": "git",
