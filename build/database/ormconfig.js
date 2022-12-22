@@ -7,13 +7,13 @@ const teacher_entity_1 = require("../models/teacher.entity");
 const subject_entity_1 = require("../models/subject.entity");
 const session_entity_1 = require("../models/session.entity");
 const task_entity_1 = require("../models/task.entity");
-const schedule_entity_1 = require("../models/schedule.entity");
 const archive_request_entity_1 = require("../models/archive_request.entity");
 const information_entity_1 = require("../models/information.entity");
 const program_entity_1 = require("../models/program.entity");
 const establishment_entity_1 = require("../models/establishment.entity");
 const teacher_ets_entity_1 = require("../models/teacher_ets.entity");
 const subject_ets_entity_1 = require("../models/subject_ets.entity");
+const schedule_entity_1 = require("../models/schedule.entity");
 const config = {
     type: 'postgres',
     host: process.env.HOST,

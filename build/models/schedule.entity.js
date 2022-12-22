@@ -8,25 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Schedule = void 0;
 const typeorm_1 = require("typeorm");
 const year_academic_entity_1 = require("./year_academic.entity");
 const class_entity_1 = require("./class.entity");
-const scheduleInterface_dto_1 = __importDefault(require("../dto/scheduleInterface.dto"));
 let Schedule = class Schedule {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Schedule.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'jsonb' }),
-    __metadata("design:type", scheduleInterface_dto_1.default)
-], Schedule.prototype, "schedule", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => class_entity_1.Class, (classe) => classe.schedule),
     (0, typeorm_1.JoinColumn)(),

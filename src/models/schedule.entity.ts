@@ -7,8 +7,8 @@ export class Schedule{
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @Column({type:'jsonb'})
-    public schedule: ScheduleIntefaceDto;
+    // @Column({type:'jsonb'})
+    // public schedule: ScheduleIntefaceDto;
 
     @OneToOne(()=>Class,(classe)=>classe.schedule)
     @JoinColumn()
