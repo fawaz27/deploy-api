@@ -91,7 +91,7 @@ export class ScheduleService{
                         throw new ScheduleAlreadyExistsException(classe.name,year.year);
                     }  
                     const newschedule = new Schedule();
-                    // newschedule.schedule=schedule.schedule;
+                    newschedule.schedule=schedule.schedule;
                     newschedule.classe=classe;
                     newschedule.year=year;
                     const created = await this.scheduleRepository.save(newschedule);
@@ -172,7 +172,7 @@ export class ScheduleService{
                 if (scheduleUpdate) {
 
                     
-                    // scheduleUpdate.schedule=schedule.schedule;
+                    scheduleUpdate.schedule=schedule.schedule;
                     
                     const result = await this.scheduleRepository.save(scheduleUpdate);
 
@@ -275,14 +275,14 @@ export class ScheduleService{
 
                 const subjectIds = subjects.map(it=>it.subjectId);
 
-                // schedule.schedule = this.filterSchedule(subjectIds,schedule.schedule); 
+                schedule.schedule = this.filterSchedule(subjectIds,schedule.schedule); 
     
                 console.log(schedule);
 
                 return schedule;
             } 
             else {
-                // schedule.schedule = this.cleanSchedule(schedule.schedule);
+                schedule.schedule = this.cleanSchedule(schedule.schedule);
                 return schedule;
             }
         } 

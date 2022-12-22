@@ -80,7 +80,7 @@ class ScheduleService {
                         throw new ScheduleAlreadyExistsException_1.default(classe.name, year.year);
                     }
                     const newschedule = new schedule_entity_1.Schedule();
-                    // newschedule.schedule=schedule.schedule;
+                    newschedule.schedule = schedule.schedule;
                     newschedule.classe = classe;
                     newschedule.year = year;
                     const created = yield this.scheduleRepository.save(newschedule);
@@ -140,7 +140,7 @@ class ScheduleService {
                         .andWhere("year.year = :yearAcademic", { yearAcademic: schedule.yearAcademic })
                         .getOne();
                     if (scheduleUpdate) {
-                        // scheduleUpdate.schedule=schedule.schedule;
+                        scheduleUpdate.schedule = schedule.schedule;
                         const result = yield this.scheduleRepository.save(scheduleUpdate);
                         if (result) {
                             return result;
@@ -213,12 +213,12 @@ class ScheduleService {
             if (schedule) {
                 if (subjects && subjects.length != 0) {
                     const subjectIds = subjects.map(it => it.subjectId);
-                    // schedule.schedule = this.filterSchedule(subjectIds,schedule.schedule); 
+                    schedule.schedule = this.filterSchedule(subjectIds, schedule.schedule);
                     console.log(schedule);
                     return schedule;
                 }
                 else {
-                    // schedule.schedule = this.cleanSchedule(schedule.schedule);
+                    schedule.schedule = this.cleanSchedule(schedule.schedule);
                     return schedule;
                 }
             }
