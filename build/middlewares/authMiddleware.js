@@ -14,11 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const AppDataSource_1 = require("../database/AppDataSource");
+const teacher_entity_1 = require("../models/teacher.entity");
 const WrongAuthenticationTokenException_1 = __importDefault(require("../exceptions/WrongAuthenticationTokenException"));
 const AuthenticationTokenMissingException_1 = __importDefault(require("../exceptions/AuthenticationTokenMissingException"));
-const user_entity_1 = require("../modules/user/user.entity");
 function authMiddleware(request, response, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        //console.log(request);
+        //request.cookies={};
         const cookies = request.cookies;
         // console.log(cookies);
         if (cookies && cookies.Authorization) {
@@ -26,8 +28,7 @@ function authMiddleware(request, response, next) {
             try {
                 const verificationResponse = jsonwebtoken_1.default.verify(cookies.Authorization, secret);
                 const id = verificationResponse._id;
-                const user = yield AppDataSource_1.AppDataSource.getRepository(user_entity_1.User).findOneBy({ id: Number(id) });
-                // console.log(user?.email)
+                const user = yield AppDataSource_1.AppDataSource.getRepository(teacher_entity_1.Teacher).findOneBy({ id: Number(id) });
                 if (user) {
                     request.user = user;
                     next();

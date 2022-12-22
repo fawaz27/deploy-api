@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import { User } from '../modules/user/user.entity';
+import { Teacher } from '../models/teacher.entity'
 
 
-interface ResponseWithUser extends Response {
-    user:User;
+interface ResponseWithTeacher extends Response {
+    user:Teacher;
 }
-export default ResponseWithUser;
+export default ResponseWithTeacher;

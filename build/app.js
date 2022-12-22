@@ -8,7 +8,8 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const errorMiddleware_1 = __importDefault(require("./middlewares/errorMiddleware"));
-// import swaggerDocument from './docs/swaggerDocument';
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swaggerDocument_1 = __importDefault(require("./docs/swaggerDocument"));
 const cors_1 = __importDefault(require("cors"));
 class App {
     constructor(controllers) {
@@ -37,11 +38,7 @@ class App {
         this.app.use((0, cookie_parser_1.default)());
         this.app.use((0, morgan_1.default)("tiny"));
         this.app.use(express_1.default.static("public"));
-        // this.app.use(
-        //   '/api-docs',
-        //   swaggerUi.serve, 
-        //   swaggerUi.setup(swaggerDocument,{ explorer: true })
-        // );
+        this.app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument_1.default, { explorer: true }));
         this.app.use((0, cors_1.default)());
     }
     initializeErrorHandling() {

@@ -1,16 +1,17 @@
 import  jwt from 'jsonwebtoken';
 import {NextFunction, Response ,Request} from 'express';
 import DataStoredInToken from '../interfaces/dataStoredInToken.interface'
+import RequestWithTeacher from '../interfaces/requestWithTeacher.interface';
 import { AppDataSource } from '../database/AppDataSource'
+import { Teacher } from '../models/teacher.entity'
 import WrongAuthenticationTokenException from '../exceptions/WrongAuthenticationTokenException';
 import AuthenticationTokenMissingException from '../exceptions/AuthenticationTokenMissingException';
-import RequestWithUser from '../interfaces/requestWithUser.interface';
-import { User } from '../modules/user/user.entity';
 
-async function authMiddleware(request: RequestWithUser, response: Response, next: NextFunction)
+async function authMiddleware(request: RequestWithTeacher, response: Response, next: NextFunction)
 {
-   
-    const cookies = request.cookies;
+   //console.log(request);
+   //request.cookies={};
+    const cookies =request.cookies;
     // console.log(cookies);
     
     if (cookies && cookies.Authorization) {
@@ -18,14 +19,15 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
         try {
             const verificationResponse = jwt.verify(cookies.Authorization, secret as string) as DataStoredInToken;
             const id = verificationResponse._id;
-            const user = await  AppDataSource.getRepository(User).findOneBy({id: Number(id)});
-            // console.log(user?.email)
+
+            const user = await  AppDataSource.getRepository(Teacher).findOneBy({id: Number(id)});
+
             if (user) {
-                request.user = user;
-                next();
+                request.user=user;
+                next();       
             }
             else
-                next(new WrongAuthenticationTokenException());      
+                next(new WrongAuthenticationTokenException());            
         } catch (error) {
             next(new WrongAuthenticationTokenException());
         }
@@ -37,4 +39,4 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
 }
 
 
-export default authMiddleware as unknown as (req:Request,res:Response,net:NextFunction)=>{};
+export default authMiddleware;
