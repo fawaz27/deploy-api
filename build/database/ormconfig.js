@@ -16,11 +16,12 @@ const subject_ets_entity_1 = require("../models/subject_ets.entity");
 const schedule_entity_1 = require("../models/schedule.entity");
 const config = {
     type: 'postgres',
-    host: process.env.HOST,
-    port: Number(process.env.PORT_DB),
-    username: process.env.USERNAME_DB,
-    password: process.env.PASSWORD_DB,
-    database: process.env.NAME_DB,
+    // host: process.env.HOST,
+    // port: Number(process.env.PORT_DB),
+    // username: process.env.USERNAME_DB,
+    // password: process.env.PASSWORD_DB,
+    // database: process.env.NAME_DB,
+    url: process.env.URL_DB,
     entities: [
         teacher_entity_1.Teacher,
         subject_entity_1.Subject,
@@ -38,5 +39,6 @@ const config = {
         subject_ets_entity_1.Subject_Ets
     ],
     synchronize: true,
+    logging: false
 };
 exports.default = config;

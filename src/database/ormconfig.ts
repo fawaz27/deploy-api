@@ -16,11 +16,12 @@ import { Schedule } from '../models/schedule.entity';
 
 const config: DataSourceOptions = {
     type: 'postgres',
-    host: process.env.HOST,
-    port: Number(process.env.PORT_DB),
-    username: process.env.USERNAME_DB,
-    password: process.env.PASSWORD_DB,
-    database: process.env.NAME_DB,
+    // host: process.env.HOST,
+    // port: Number(process.env.PORT_DB),
+    // username: process.env.USERNAME_DB,
+    // password: process.env.PASSWORD_DB,
+    // database: process.env.NAME_DB,
+    url: process.env.URL_DB,
     entities: [
      Teacher,
      Subject,
@@ -38,7 +39,7 @@ const config: DataSourceOptions = {
      Subject_Ets
     ],
     synchronize: true,
-    
+    logging: false
 };
  
 export default config;
